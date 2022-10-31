@@ -1,36 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/31 09:13:21 by fesper-s          #+#    #+#             */
-/*   Updated: 2022/10/31 09:28:25 by fesper-s         ###   ########.fr       */
+/*   Created: 2022/10/31 09:13:12 by fesper-s          #+#    #+#             */
+/*   Updated: 2022/10/31 09:29:11 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#include "philo.h"
 
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <pthread.h>
-
-typedef struct s_philo
+int	ft_isdigit(int n)
 {
-	int	nbphilo;
-	int	ttdie;
-	int	tteat;
-	int	ttsleep;
-	int	nbmeals;
-}	t_philo;
+	if (n >= '0' && n <= '9')
+		return (1);
+	return (0);
+}
 
-//main.c
-void	get_arg(t_philo *stats, char **str, int size);
-// utils.c
-int		ft_isdigit(int n);
-int		ft_atoi(const char *str);
+int	ft_atoi(const char *str)
+{
+	int	nbr;
+	int	sign;
 
-#endif
+	nbr = 0;
+	sign = 1;
+	if (*str == '-')
+	{
+		sign *= -1;
+		str++;
+	}
+	while (*str)
+		nbr = (nbr * 10) + *str++ - 48;
+	return (sign * nbr);
+}

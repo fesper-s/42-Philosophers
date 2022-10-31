@@ -1,8 +1,20 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/10/31 09:13:28 by fesper-s          #+#    #+#              #
+#    Updated: 2022/10/31 09:26:30 by fesper-s         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME	= philo
 
-SRCS	= ./main.c
+SRCS	= ./main.c ./utils.c
 
-CFLAGS	= -g -pthread -Wall -Werror -Wextra
+CFLAGS	= -pthread -Wall -Werror -Wextra
 
 OBJS	= $(SRCS:.c=.o)
 
