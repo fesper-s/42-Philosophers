@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 09:16:42 by fesper-s          #+#    #+#             */
-/*   Updated: 2022/10/31 12:59:47 by fesper-s         ###   ########.fr       */
+/*   Updated: 2022/11/09 08:40:35 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,16 @@ void	get_arg(t_philo *stats, char **str, int size)
 		stats->nbmeals = ft_atoi(str[5]);
 }
 
+void	check_philo(t_philo *stats, int size)
+{
+	printf("Number of Philosophers: %d\n", stats->nbphilo);
+	printf("Time do die: %d\n", stats->ttdie);
+	printf("Time to eat: %d\n", stats->tteat);
+	printf("Time to sleep:%d\n", stats->ttsleep);
+	if (size == 6)
+		printf("Number of meals: %d\n", stats->nbmeals);
+}
+
 int	main(int argc, char **argv)
 {
 	t_philo	stats;
@@ -47,6 +57,7 @@ int	main(int argc, char **argv)
 	if (argc == 5 || argc == 6)
 	{
 		get_arg(&stats, argv, argc);
+		check_philo(&stats, argc);
 	}
 	else
 		printf("Invalid number of arguments\n");
