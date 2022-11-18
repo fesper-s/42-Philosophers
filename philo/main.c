@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 09:16:42 by fesper-s          #+#    #+#             */
-/*   Updated: 2022/11/09 08:40:35 by fesper-s         ###   ########.fr       */
+/*   Updated: 2022/11/18 16:42:51 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	check_philo(t_philo *stats, int size)
 	printf("Number of Philosophers: %d\n", stats->nbphilo);
 	printf("Time do die: %d\n", stats->ttdie);
 	printf("Time to eat: %d\n", stats->tteat);
-	printf("Time to sleep:%d\n", stats->ttsleep);
+	printf("Time to sleep: %d\n", stats->ttsleep);
 	if (size == 6)
 		printf("Number of meals: %d\n", stats->nbmeals);
 }
