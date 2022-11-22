@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 09:16:42 by fesper-s          #+#    #+#             */
-/*   Updated: 2022/11/21 10:40:36 by fesper-s         ###   ########.fr       */
+/*   Updated: 2022/11/22 11:31:49 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,27 +43,53 @@ void	get_arg(t_data *data, char **str, int size)
 void	check_philo(t_data *data, int size)
 {
 	printf("Number of Philosophers: %d\n", data->nbphilo);
-	printf("Time do die: %d\n", data->ttdie);
+	printf("Time to die: %d\n", data->ttdie);
 	printf("Time to eat: %d\n", data->tteat);
 	printf("Time to sleep: %d\n", data->ttsleep);
 	if (size == 6)
 		printf("Number of meals: %d\n", data->nbmeals);
 }
 
+void	eating(t_data *data)
+{
+	printf("antes do lock\n");
+	if (pthread_mutex_lock(&(data->forks[data->philo->fork_l])))
+		printf("%d has taken a fork\n", data->philo->id);
+}
+
 void	*routine(void *p)
 {
 	t_philo	*philo;
+	t_data	*data;
 
 	philo = (t_philo *)p;
-	printf("ESTA PORRA %d\n", philo->id);
+	data = philo->data;
+	printf("%d\n", data->ttdie);
+	/*while (!data->died)
+	{
+		printf("no while\n");
+		//eating(data);
+	}*/
 	return (NULL);
+}
+
+void	init_mutex(t_data *data)
+{
+	int	i;
+
+	data->forks = malloc(sizeof(pthread_mutex_t) * data->nbphilo);
+	i = -1;
+	while (++i < data->nbphilo)
+		pthread_mutex_init(&(data->forks[i]), NULL);
 }
 
 void	attr_philo(t_data *data)
 {
-	int	i;
+	int		i;
+	t_philo	*philo;
 
 	data->philo = malloc(sizeof(t_philo) * data->nbphilo);
+	data->died = 0;
 	i = -1;
 	while (++i < data->nbphilo)
 	{
@@ -71,19 +97,22 @@ void	attr_philo(t_data *data)
 		data->philo[i].fork_l = i;
 		data->philo[i].fork_r = (i + 1) % data->nbphilo;
 	}
+	philo = data->philo;
+	printf("%d\n", philo->data->ttdie);
 	i = -1;
-	while (1)
+	while (++i < data->nbphilo)
 	{
-		while (++i < data->nbphilo)
-		{
-			pthread_create(&data->philo[i].threads, NULL, &routine, \
-				&data->philo[i]);
-		}
-		i = -1;
-		while (++i < data->nbphilo)
-		{
-			pthread_join(data->philo[i].threads, NULL);
-		}
+		printf("antes create\n");
+		pthread_create(&data->philo[i].threads, NULL, &routine, \
+			&philo[i]);
+		printf("depois create\n");
+	}
+	i = -1;
+	while (++i < data->nbphilo)
+	{
+		printf("antes do join\n");
+		pthread_join(philo[i].threads, NULL);
+		printf("depois do join\n");
 	}
 }
 
@@ -95,6 +124,7 @@ int	main(int argc, char **argv)
 	{
 		get_arg(&data, argv, argc);
 		check_philo(&data, argc);
+		init_mutex(&data);
 		attr_philo(&data);
 	}
 	else
