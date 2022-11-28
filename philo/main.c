@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 09:16:42 by fesper-s          #+#    #+#             */
-/*   Updated: 2022/11/22 11:31:49 by fesper-s         ###   ########.fr       */
+/*   Updated: 2022/11/24 14:20:35 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,18 @@ void	get_arg(t_data *data, char **str, int size)
 	int	i;
 	int	j;
 
-	i = 1;
-	while (str[i])
+	i = 0;
+	while (str[++i])
 	{
-		j = 0;
-		while (str[i][j])
+		j = -1;
+		while (str[i][++j])
 		{
 			if (!ft_isdigit(str[i][j]))
 			{
 				write(2, "Error\n", 6);
 				exit(EXIT_FAILURE);
 			}
-			j++;
 		}
-		i++;
 	}
 	data->nbphilo = ft_atoi(str[1]);
 	data->ttdie = ft_atoi(str[2]);
