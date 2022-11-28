@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 09:13:21 by fesper-s          #+#    #+#             */
-/*   Updated: 2022/11/22 11:30:26 by fesper-s         ###   ########.fr       */
+/*   Updated: 2022/11/28 14:12:24 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,6 @@
 # include <unistd.h>
 # include <pthread.h>
 # include <sys/time.h>
-
-typedef struct s_philo
-{
-	int			id;
-	int			fork_l;
-	int			fork_r;
-	pthread_t	threads;
-	struct s_data	*data;
-}	t_philo;
 
 typedef struct s_data
 {
@@ -40,11 +31,23 @@ typedef struct s_data
 	struct s_philo	*philo;
 }	t_data;
 
+typedef struct s_philo
+{
+	int			id;
+	int			fork_l;
+	int			fork_r;
+	pthread_t	threads;
+	t_data		*data;
+}	t_philo;
+
 // main.c
 void	get_arg(t_data *data, char **str, int size);
+// philo.c
 void	eating(t_data *data);
 void	*routine(void *p);
 void	attr_philo(t_data *data);
+// mutex.c
+void	init_mutex(t_data *data);
 // utils.c
 int		ft_isdigit(int n);
 int		ft_atoi(const char *str);
