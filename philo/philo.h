@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 09:13:21 by fesper-s          #+#    #+#             */
-/*   Updated: 2022/11/28 14:12:24 by fesper-s         ###   ########.fr       */
+/*   Updated: 2022/11/28 16:30:48 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,18 @@ typedef struct s_philo
 }	t_philo;
 
 // main.c
-void	get_arg(t_data *data, char **str, int size);
+int		get_arg(t_data *data, char **str, int size);
 // philo.c
+void	attr_philo(t_data *data);
+void	init_thread(t_data *data);
 void	eating(t_data *data);
 void	*routine(void *p);
-void	attr_philo(t_data *data);
 // mutex.c
 void	init_mutex(t_data *data);
 // utils.c
 int		ft_isdigit(int n);
+int		t_strlen(char *str);
+void	ft_putstr_fd(char *str, int fd);
 int		ft_atoi(const char *str);
 
 #endif

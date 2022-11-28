@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 09:16:42 by fesper-s          #+#    #+#             */
-/*   Updated: 2022/11/28 13:54:53 by fesper-s         ###   ########.fr       */
+/*   Updated: 2022/11/28 16:30:21 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int	main(int argc, char **argv)
 
 	if (argc == 5 || argc == 6)
 	{
-		get_arg(&data, argv, argc);
+		if (get_arg(&data, argv, argc) != 0)
+			return (1);
 		init_mutex(&data);
 		attr_philo(&data);
 	}
@@ -27,7 +28,7 @@ int	main(int argc, char **argv)
 	return (0);
 }
 
-void	get_arg(t_data *data, char **str, int size)
+int	get_arg(t_data *data, char **str, int size)
 {
 	int	i;
 	int	j;
@@ -40,8 +41,8 @@ void	get_arg(t_data *data, char **str, int size)
 		{
 			if (!ft_isdigit(str[i][j]))
 			{
-				write(2, "Error\n", 6);
-				exit(EXIT_FAILURE);
+				ft_putstr_fd("Error: parameter is not a number\n", 2);
+				return (1);
 			}
 		}
 	}
@@ -51,4 +52,5 @@ void	get_arg(t_data *data, char **str, int size)
 	data->ttsleep = ft_atoi(str[4]);
 	if (size == 6)
 		data->nbmeals = ft_atoi(str[5]);
+	return (0);
 }

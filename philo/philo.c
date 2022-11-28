@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:58:34 by fesper-s          #+#    #+#             */
-/*   Updated: 2022/11/28 14:27:54 by fesper-s         ###   ########.fr       */
+/*   Updated: 2022/11/28 16:33:43 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 void	attr_philo(t_data *data)
 {
-	int		i;
-	t_philo	*philo;
+	int	i;
 
 	data->philo = malloc(sizeof(t_philo) * data->nbphilo);
 	data->died = 0;
@@ -27,23 +26,22 @@ void	attr_philo(t_data *data)
 		data->philo[i].fork_l = i;
 		data->philo[i].fork_r = (i + 1) % data->nbphilo;
 	}
+	init_thread(data);
+}
+
+void	init_thread(t_data *data)
+{
+	t_philo	*philo;
+	int		i;
+
 	philo = data->philo;
-	printf("%d\n", philo->data->ttdie);
 	i = -1;
 	while (++i < data->nbphilo)
-	{
-		printf("----------\nantes create\n");
 		pthread_create(&data->philo[i].threads, NULL, &routine, \
 			&philo[i]);
-		printf("depois create\n----------\n");
-	}
 	i = -1;
 	while (++i < data->nbphilo)
-	{
-		printf("antes do join\n");
 		pthread_join(philo[i].threads, NULL);
-		printf("depois do join\n");
-	}
 }
 
 void	eating(t_data *data)
@@ -60,12 +58,10 @@ void	*routine(void *p)
 
 	philo = (t_philo *)p;
 	data = philo->data;
-	(void) data;
-	//printf("ROUTINE %d\n", data->ttdie);
-	/*while (!data->died)
+	printf("%d\n", data->died);
+	while (!data->died)
 	{
-		printf("no while\n");
 		//eating(data);
-	}*/
+	}
 	return (NULL);
 }
