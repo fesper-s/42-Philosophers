@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 09:16:42 by fesper-s          #+#    #+#             */
-/*   Updated: 2022/11/28 16:30:21 by fesper-s         ###   ########.fr       */
+/*   Updated: 2022/11/29 10:12:33 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	main(int argc, char **argv)
 			return (1);
 		init_mutex(&data);
 		attr_philo(&data);
+		destroy_mutex(&data);
 	}
 	else
 		printf("Invalid number of arguments\n");

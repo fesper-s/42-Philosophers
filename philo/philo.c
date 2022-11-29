@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:58:34 by fesper-s          #+#    #+#             */
-/*   Updated: 2022/11/28 16:33:43 by fesper-s         ###   ########.fr       */
+/*   Updated: 2022/11/29 09:07:46 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	attr_philo(t_data *data)
 	while (++i < data->nbphilo)
 	{
 		data->philo[i].data = data;
-		data->philo[i].id = i;
+		data->philo[i].id = i + 1;
 		data->philo[i].fork_l = i;
 		data->philo[i].fork_r = (i + 1) % data->nbphilo;
 	}
@@ -58,9 +58,10 @@ void	*routine(void *p)
 
 	philo = (t_philo *)p;
 	data = philo->data;
-	printf("%d\n", data->died);
 	while (!data->died)
 	{
+		printf("ID = %d\n", philo->id);
+		break ;
 		//eating(data);
 	}
 	return (NULL);

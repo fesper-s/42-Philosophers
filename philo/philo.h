@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 09:13:21 by fesper-s          #+#    #+#             */
-/*   Updated: 2022/11/28 16:30:48 by fesper-s         ###   ########.fr       */
+/*   Updated: 2022/11/29 09:47:00 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	eating(t_data *data);
 void	*routine(void *p);
 // mutex.c
 void	init_mutex(t_data *data);
+void	destroy_mutex(t_data *data);
 // utils.c
 int		ft_isdigit(int n);
 int		t_strlen(char *str);
