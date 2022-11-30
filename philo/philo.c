@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:58:34 by fesper-s          #+#    #+#             */
-/*   Updated: 2022/11/29 09:07:46 by fesper-s         ###   ########.fr       */
+/*   Updated: 2022/11/30 09:40:12 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	init_thread(t_data *data)
 	int		i;
 
 	philo = data->philo;
+	data->time = start_count();
 	i = -1;
 	while (++i < data->nbphilo)
 		pthread_create(&data->philo[i].threads, NULL, &routine, \
@@ -44,13 +45,6 @@ void	init_thread(t_data *data)
 		pthread_join(philo[i].threads, NULL);
 }
 
-void	eating(t_data *data)
-{
-	printf("antes do lock\n");
-	if (pthread_mutex_lock(&(data->forks[data->philo->fork_l])))
-		printf("%d has taken a fork\n", data->philo->id);
-}
-
 void	*routine(void *p)
 {
 	t_philo	*philo;
@@ -58,11 +52,11 @@ void	*routine(void *p)
 
 	philo = (t_philo *)p;
 	data = philo->data;
+	if (philo->id % 2 != 0)
+		usleep(50);
 	while (!data->died)
 	{
-		printf("ID = %d\n", philo->id);
-		break ;
-		//eating(data);
+		eating(philo);
 	}
 	return (NULL);
 }

@@ -6,13 +6,13 @@
 #    By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/31 09:13:28 by fesper-s          #+#    #+#              #
-#    Updated: 2022/11/28 14:19:49 by fesper-s         ###   ########.fr        #
+#    Updated: 2022/11/30 08:57:03 by fesper-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= philo
 
-SRCS	= ./main.c ./utils.c ./philo.c ./mutex.c
+SRCS	= ./main.c ./utils.c ./philo.c ./mutex.c ./time.c
 
 CFLAGS	= -pthread -Wall -Werror -Wextra
 
