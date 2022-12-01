@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:58:34 by fesper-s          #+#    #+#             */
-/*   Updated: 2022/11/30 09:40:12 by fesper-s         ###   ########.fr       */
+/*   Updated: 2022/12/01 14:15:23 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	attr_philo(t_data *data)
 		data->philo[i].id = i + 1;
 		data->philo[i].fork_l = i;
 		data->philo[i].fork_r = (i + 1) % data->nbphilo;
+		data->philo[i].meals = 0;
 	}
 	init_thread(data);
 }
@@ -38,11 +39,17 @@ void	init_thread(t_data *data)
 	data->time = start_count();
 	i = -1;
 	while (++i < data->nbphilo)
-		pthread_create(&data->philo[i].threads, NULL, &routine, \
-			&philo[i]);
+	{
+		if (pthread_create(&data->philo[i].threads, NULL, &routine, \
+			&philo[i]) != 0)
+			ft_putstr_fd("Fail to create thread", 2);
+		philo[i].last_meal = start_count();
+	}
 	i = -1;
+	check_health(data, philo);
 	while (++i < data->nbphilo)
-		pthread_join(philo[i].threads, NULL);
+		if (pthread_join(philo[i].threads, NULL) != 0)
+			ft_putstr_fd("Fail to join thread", 2);
 }
 
 void	*routine(void *p)
@@ -53,10 +60,23 @@ void	*routine(void *p)
 	philo = (t_philo *)p;
 	data = philo->data;
 	if (philo->id % 2 != 0)
-		usleep(50);
+		usleep(15000);
 	while (!data->died)
 	{
+		if (data->philos_ate == data->nbphilo)
+			break ;
 		eating(philo);
 	}
 	return (NULL);
+}
+
+void	free_philo(t_data *data)
+{
+	int	i;
+
+	i = -1;
+	while (++i < data->nbphilo)
+	{
+		free(&(data->philo[i]));
+	}
 }

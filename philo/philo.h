@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 09:13:21 by fesper-s          #+#    #+#             */
-/*   Updated: 2022/11/30 09:38:41 by fesper-s         ###   ########.fr       */
+/*   Updated: 2022/12/01 14:14:58 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,10 @@ typedef struct s_data
 	int				ttsleep;
 	int				nbmeals;
 	int				died;
+	int				philos_ate;
 	unsigned long	time;
 	pthread_mutex_t	*forks;
-	pthread_mutex_t writing;
+	pthread_mutex_t	writing;
 	struct s_philo	*philo;
 }	t_data;
 
@@ -38,6 +39,7 @@ typedef struct s_philo
 	int				id;
 	int				fork_l;
 	int				fork_r;
+	int				meals;
 	unsigned long	last_meal;
 	pthread_t		threads;
 	t_data			*data;
@@ -45,12 +47,15 @@ typedef struct s_philo
 
 // main.c
 int				get_arg(t_data *data, char **str, int size);
+void			init_vars(t_data *data);
 // philo.c
 void			attr_philo(t_data *data);
 void			init_thread(t_data *data);
 void			*routine(void *p);
+void			free_philo(t_data *data);
 // time.c
 unsigned long	start_count(void);
+void			check_health(t_data *data, t_philo *philo);
 // mutex.c
 void			init_mutex(t_data *data);
 void			destroy_mutex(t_data *data);
