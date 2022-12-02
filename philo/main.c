@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 09:16:42 by fesper-s          #+#    #+#             */
-/*   Updated: 2022/12/01 14:16:06 by fesper-s         ###   ########.fr       */
+/*   Updated: 2022/12/02 08:52:08 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ int	main(int argc, char **argv)
 			return (1);
 		init_mutex(&data);
 		attr_philo(&data);
-		destroy_mutex(&data);
-		free_philo(&data);
+		dstr_mutex_free_data(&data);
 	}
 	else
 		printf("Invalid number of arguments\n");
@@ -44,7 +43,7 @@ int	get_arg(t_data *data, char **str, int size)
 		{
 			if (!ft_isdigit(str[i][j]))
 			{
-				ft_putstr_fd("Error: parameter is not a number\n", 2);
+				ft_putstr_fd("Error: Parameter is not a number\n", 2);
 				return (1);
 			}
 		}
@@ -66,5 +65,5 @@ void	init_vars(t_data *data)
 	data->ttsleep = 0;
 	data->nbmeals = 0;
 	data->died = 0;
-	data->philos_ate = 0;	
+	data->philos_ate = 0;
 }

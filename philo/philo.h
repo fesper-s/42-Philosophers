@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 09:13:21 by fesper-s          #+#    #+#             */
-/*   Updated: 2022/12/01 14:14:58 by fesper-s         ###   ########.fr       */
+/*   Updated: 2022/12/02 08:52:38 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,12 @@ void			init_vars(t_data *data);
 void			attr_philo(t_data *data);
 void			init_thread(t_data *data);
 void			*routine(void *p);
-void			free_philo(t_data *data);
 // time.c
 unsigned long	start_count(void);
 void			check_health(t_data *data, t_philo *philo);
 // mutex.c
 void			init_mutex(t_data *data);
-void			destroy_mutex(t_data *data);
+void			dstr_mutex_free_data(t_data *data);
 void			print_msg(char *str, t_data *data, int id);
 void			eating(t_philo *philo);
 // utils.c

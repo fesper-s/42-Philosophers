@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:58:34 by fesper-s          #+#    #+#             */
-/*   Updated: 2022/12/01 14:15:23 by fesper-s         ###   ########.fr       */
+/*   Updated: 2022/12/02 08:52:32 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,14 @@ void	init_thread(t_data *data)
 	{
 		if (pthread_create(&data->philo[i].threads, NULL, &routine, \
 			&philo[i]) != 0)
-			ft_putstr_fd("Fail to create thread", 2);
+			ft_putstr_fd("Error: Fail to create thread", 2);
 		philo[i].last_meal = start_count();
 	}
 	i = -1;
 	check_health(data, philo);
 	while (++i < data->nbphilo)
 		if (pthread_join(philo[i].threads, NULL) != 0)
-			ft_putstr_fd("Fail to join thread", 2);
+			ft_putstr_fd("Error: Fail to join thread", 2);
 }
 
 void	*routine(void *p)
@@ -68,15 +68,4 @@ void	*routine(void *p)
 		eating(philo);
 	}
 	return (NULL);
-}
-
-void	free_philo(t_data *data)
-{
-	int	i;
-
-	i = -1;
-	while (++i < data->nbphilo)
-	{
-		free(&(data->philo[i]));
-	}
 }
