@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:57:37 by fesper-s          #+#    #+#             */
-/*   Updated: 2022/12/02 08:24:42 by fesper-s         ###   ########.fr       */
+/*   Updated: 2022/12/05 16:26:12 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,6 @@ void	dstr_mutex_free_data(t_data *data)
 
 void	print_msg(char *str, t_data *data, int id)
 {
-	t_philo	*philo;
-
-	philo = data->philo;
 	if (pthread_mutex_lock(&(data->writing)) != 0)
 		ft_putstr_fd("Error: Failed to lock mutex\n", 2);
 	if (!data->died)
