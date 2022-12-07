@@ -31,6 +31,7 @@ typedef struct s_data
 	unsigned long	time;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	writing;
+	pthread_mutex_t	ate;
 	struct s_philo	*philo;
 }	t_data;
 
@@ -54,6 +55,7 @@ void			init_thread(t_data *data);
 void			*routine(void *p);
 // time.c
 unsigned long	start_count(void);
+void			time_spent(t_data *data, int action);
 void			check_health(t_data *data, t_philo *philo);
 // mutex.c
 void			init_mutex(t_data *data);

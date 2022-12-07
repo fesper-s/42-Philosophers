@@ -40,16 +40,16 @@ void	init_thread(t_data *data)
 	i = -1;
 	while (++i < data->nbphilo)
 	{
-		if (pthread_create(&data->philo[i].threads, NULL, &routine, \
-			&philo[i]) != 0)
-			ft_putstr_fd("Error: Fail to create thread", 2);
+		pthread_create(&data->philo[i].threads, NULL, &routine, \
+			&philo[i]);
+		pthread_mutex_lock(&(data->ate));
 		philo[i].last_meal = start_count();
+		pthread_mutex_unlock(&(data->ate));
 	}
 	i = -1;
 	check_health(data, philo);
 	while (++i < data->nbphilo)
-		if (pthread_join(philo[i].threads, NULL) != 0)
-			ft_putstr_fd("Error: Fail to join thread", 2);
+		pthread_join(philo[i].threads, NULL);
 }
 
 void	*routine(void *p)
@@ -61,10 +61,18 @@ void	*routine(void *p)
 	data = philo->data;
 	if (philo->id % 2 != 0)
 		usleep(15000);
-	while (!data->died)
-	{
-		if (data->philos_ate == data->nbphilo)
+	while (1)
+	{	
+		pthread_mutex_lock(&(data->ate));
+		pthread_mutex_lock(&(data->writing));
+		if (data->philos_ate == data->nbphilo || data->died == 1)
+		{
+			pthread_mutex_unlock(&(data->ate));
+			pthread_mutex_unlock(&(data->writing));
 			break ;
+		}
+		pthread_mutex_unlock(&(data->ate));
+		pthread_mutex_unlock(&(data->writing));
 		eating(philo);
 	}
 	return (NULL);
