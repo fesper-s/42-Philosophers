@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 08:46:05 by fesper-s          #+#    #+#             */
-/*   Updated: 2022/12/02 07:58:46 by fesper-s         ###   ########.fr       */
+/*   Updated: 2022/12/12 10:45:51 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	check_health(t_data *data, t_philo *philo)
 	int	i;
 
 	i = 0;
-	while (1)
+	while (1 && data->nbphilo != 1)
 	{
 		pthread_mutex_lock(&(data->ate));
 		if (data->philos_ate == data->nbphilo)

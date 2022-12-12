@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:58:34 by fesper-s          #+#    #+#             */
-/*   Updated: 2022/12/12 09:17:53 by fesper-s         ###   ########.fr       */
+/*   Updated: 2022/12/12 10:44:28 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,28 @@ void	init_thread(t_data *data)
 		pthread_join(philo[i].threads, NULL);
 }
 
+int	one_philo(t_data *data)
+{
+	t_philo	*philo;
+
+	philo = data->philo;
+	if (data->nbphilo == 1)
+	{
+		if (pthread_mutex_lock(&(data->forks[0])) == 0)
+			print_msg("has taken a fork", data, philo->id);
+		pthread_mutex_unlock(&(data->forks[0]));
+		pthread_mutex_lock(&(data->writing));
+		usleep(data->ttdie * 1000);
+		data->died = 1;
+		printf("%lu %d died\n", start_count() - \
+			data->time, philo[0].id);
+		pthread_mutex_unlock(&(data->ate));
+		pthread_mutex_unlock(&(data->writing));
+		return (-1);
+	}
+	return (0);
+}
+
 void	*routine(void *p)
 {
 	t_philo	*philo;
@@ -59,6 +81,8 @@ void	*routine(void *p)
 
 	philo = (t_philo *)p;
 	data = philo->data;
+	if (one_philo(data) != 0)
+		return (NULL);
 	if (philo->id % 2 != 0)
 		usleep(15000);
 	while (1)
