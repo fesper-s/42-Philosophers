@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 09:16:42 by fesper-s          #+#    #+#             */
-/*   Updated: 2022/12/02 08:52:08 by fesper-s         ###   ########.fr       */
+/*   Updated: 2022/12/12 10:24:12 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ int	get_arg(t_data *data, char **str, int size)
 		{
 			if (!ft_isdigit(str[i][j]))
 			{
-				ft_putstr_fd("Error: Parameter is not a number\n", 2);
-				return (1);
+				ft_putstr_fd("Error: Invalid parameter\n", 2);
+				return (-1);
 			}
 		}
 	}

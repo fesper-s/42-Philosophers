@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:57:37 by fesper-s          #+#    #+#             */
-/*   Updated: 2022/12/05 16:26:12 by fesper-s         ###   ########.fr       */
+/*   Updated: 2022/12/12 10:07:10 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	eating(t_philo *philo)
 		print_msg("has taken a fork", data, philo->id);
 	if (pthread_mutex_lock(&(data->forks[philo->fork_r])) == 0)
 		print_msg("has taken a fork", data, philo->id);
-	pthread_mutex_lock(&(data->ate));
 	print_msg("is eating", data, philo->id);
 	philo->last_meal = start_count();
 	time_spent(data, data->tteat);
@@ -65,6 +64,5 @@ void	eating(t_philo *philo)
 	pthread_mutex_unlock(&data->forks[philo->fork_r]);
 	print_msg("is sleeping", data, philo->id);
 	time_spent(data, data->ttsleep);
-	pthread_mutex_unlock(&(data->ate));
 	print_msg("is thinking", data, philo->id);
 }

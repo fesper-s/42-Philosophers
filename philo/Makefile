@@ -6,7 +6,7 @@
 #    By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/31 09:13:28 by fesper-s          #+#    #+#              #
-#    Updated: 2022/12/01 14:01:40 by fesper-s         ###   ########.fr        #
+#    Updated: 2022/12/12 10:16:21 by fesper-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME	= philo
 
 SRCS	= ./main.c ./utils.c ./philo.c ./mutex.c ./time.c
 
-CFLAGS	= -g -pthread -Wall -Werror -Wextra
+CFLAGS	= -pthread -Wall -Werror -Wextra
 
 OBJS	= $(SRCS:.c=.o)
 
