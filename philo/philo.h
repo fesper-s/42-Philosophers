@@ -6,7 +6,7 @@
 /*   By: fesper-s <fesper-s@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 09:13:21 by fesper-s          #+#    #+#             */
-/*   Updated: 2022/12/12 10:06:57 by fesper-s         ###   ########.fr       */
+/*   Updated: 2022/12/13 10:50:40 by fesper-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,23 +46,19 @@ typedef struct s_philo
 	t_data			*data;
 }	t_philo;
 
-// main.c
 int				get_arg(t_data *data, char **str, int size);
 void			init_vars(t_data *data);
-// philo.c
 void			attr_philo(t_data *data);
 void			init_thread(t_data *data);
+int				one_philo(t_data *data);
 void			*routine(void *p);
-// time.c
 unsigned long	start_count(void);
 void			time_spent(t_data *data, int action);
 void			check_health(t_data *data, t_philo *philo);
-// mutex.c
 void			init_mutex(t_data *data);
 void			dstr_mutex_free_data(t_data *data);
 void			print_msg(char *str, t_data *data, int id);
 void			eating(t_philo *philo);
-// utils.c
 int				ft_isdigit(int n);
 int				t_strlen(char *str);
 void			ft_putstr_fd(char *str, int fd);
