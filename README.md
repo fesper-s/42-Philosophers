@@ -1,4 +1,9 @@
-# 42-Philosophers - 100% ✅
+<div align="center">
+<a><img height="120px" src="https://github.com/fesper-s/fesper-s/blob/main/src/42_badges/philosopherse.png"></a>
+
+# Philosophers - 100% ✅
+</div>
+
 In this project, I learned the basics of threading a process. Creating threads and using mutexes.
 
 ## Usage
